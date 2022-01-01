@@ -6,4 +6,25 @@
   body{
     font-family: 'Roboto Mono', monospace;
   }
+  @supports (font-variation-settings: "wght" 300){
+    h2, h3, p{
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 300;
+    }
+  }
+  @supports (font-variation-settings: "wght" 700){
+    h1{
+      font-family: monospace;
+      font-weight: 700;
+    }
+  }
+}
+
+@layer utilities {
+  .landingAspectRatio{
+    height: 100%;
+  }
+  .HeroImageMobileWidth{
+    width: calc(100% - 10px);
+  }
 }
