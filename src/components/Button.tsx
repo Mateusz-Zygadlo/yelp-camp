@@ -1,8 +1,12 @@
 import React from 'react'
 
-export const Button: React.FC = ({ children }) => {
+interface ButtonProps { 
+  reverse?: boolean;
+}
+
+export const Button: React.FC<ButtonProps> = ({ reverse, children }) => {
   return(
-    <button className="bg-black rounded-md text-white font-bold px-4 py-3">
+    <button className={`${reverse ? 'text-black border' : 'bg-black text-white'} rounded-md font-bold px-4 py-3`}>
       {children}
     </button>
   )
