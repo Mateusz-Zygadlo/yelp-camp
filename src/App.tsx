@@ -5,14 +5,16 @@ import {
   Route
 } from 'react-router-dom'
 import {
-  Welcome
+  Welcome,
+  Home,
 } from './pages'
 
 export const App: React.FC = () => {
   return(
     <BrowserRouter>
       <Routes>
-        <Route path='/welcome' element={<Welcome />} /> 
+        <Route path='/' element={<Home />} />
+        <Route path='/welcome' element={<Welcome />} />
       </Routes>
     </BrowserRouter>
   )

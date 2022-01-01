@@ -6,6 +6,7 @@ import {
   useMeasure,
 } from '../hooks'
 import { Images } from '../assets'
+import { Button } from '../components'
 import { MOBILE_WIDTH } from '../constants'
  
 export const Welcome: React.FC = () => {
@@ -54,8 +55,8 @@ export const Welcome: React.FC = () => {
             </li>
           </ul>
         </div>
-        <div>
-          <button className="w-44 h-14 bg-black rounded-md text-white font-bold mt-3">View Campgrounds</button>
+        <div className="mt-3">
+          <Button>View Campgrounds</Button>
         </div> 
         <div className="mt-6 w-1/2 pb-10 lg:pb-0">
           <h3>Partnered with: </h3>
