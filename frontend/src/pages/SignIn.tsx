@@ -1,6 +1,7 @@
 import React, {
   useState,
   useEffect,
+  useContext,
 } from 'react'
 import { 
   useWindowSize,
@@ -15,6 +16,7 @@ import {
   useNavigate,
 } from 'react-router-dom'
 import axios from 'axios'
+import { UserContext } from '../context'
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +29,7 @@ export const SignIn: React.FC = () => {
     password: '',
   })
   const history = useNavigate()
+  const { setUser } = useContext(UserContext)
 
   const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -37,6 +40,7 @@ export const SignIn: React.FC = () => {
         password: values.password
       })
       setError(null)
+      setUser(res.data)
 
       return history('/')
     }catch(err){

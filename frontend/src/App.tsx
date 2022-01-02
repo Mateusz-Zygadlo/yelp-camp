@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { 
+  useState,
+  useEffect,
+} from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -20,21 +23,36 @@ import {
 import { 
   Images 
 } from './assets'
+import { UserContext } from './context';
+import { useDecodeUser } from './hooks'
 
 export const App: React.FC = () => {
+  const decodedUser = useDecodeUser()
+  const [user, setUser] = useState(null)
+  const value = {
+    user,
+    setUser
+  }
+
+  useEffect(() => {
+    if(decodedUser) setUser(decodedUser)
+  }, [decodedUser])
+  
   return(
     <BrowserRouter>
-      <Routes>
-        <Route path='/welcome' element={<Welcome />} />
-        <Route path='/login' element={<SignIn />} />
-        <Route path='/register' element={<SignUp />} />
-        <Route element={<MainLayout />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/detail' element={<Detail />} />
-          <Route path='/addCampground' element={<AddCampground />} />
-          <Route path='/addComment' element={<AddComment />} />
-        </Route>
-      </Routes>
+      <UserContext.Provider value={value}>
+        <Routes>
+          <Route path='/welcome' element={<Welcome />} />
+          <Route path='/login' element={<SignIn />} />
+          <Route path='/register' element={<SignUp />} />
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/detail' element={<Detail />} />
+            <Route path='/addCampground' element={<AddCampground />} />
+            <Route path='/addComment' element={<AddComment />} />
+          </Route>
+        </Routes>
+      </UserContext.Provider>
     </BrowserRouter>
   )
 }
@@ -42,7 +60,7 @@ export const App: React.FC = () => {
 const MainLayout: React.FC = () => {
   return(
     <div className="px-8 md:px-16 lg:px-24 py-10">
-      <Navbar isLogged={false} />
+      <Navbar />
 
       <Outlet />
 

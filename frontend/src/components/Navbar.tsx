@@ -1,8 +1,11 @@
 import React, {
   useState, 
   useEffect,
+  useContext,
 } from 'react'
-import { Link } from 'react-router-dom'
+import { 
+  Link,
+} from 'react-router-dom'
 import { Images } from '../assets'
 import { Button } from '../components'
 import { MOBILE_WIDTH } from '../constants'
@@ -10,17 +13,28 @@ import {
   useWindowSize,
   useMeasure
 } from '../hooks'
+import { UserContext } from '../context' 
+import axios from 'axios'
 
-interface NavbarProps {
-  isLogged: boolean,
-}
+axios.defaults.withCredentials = true;
 
-export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
+export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const USERNAME = 'Username'
   const [rect, myRef]: any = useMeasure()
   const { width, setWidth } = useWindowSize()
   const toggleMenu = (props: boolean) => setIsOpen(props)
+  const { user } = useContext(UserContext)
+
+  const logout = async () => {
+    try{
+      const res = await axios.post('http://localhost:8000/auth/logout')
+      console.log(res)
+
+      return window.location.reload()
+    }catch(err){
+      return window.location.reload()
+    }
+  }
 
   useEffect(() => {
     if(rect) setWidth(rect.width)
@@ -44,10 +58,13 @@ export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
       </div>
      {width > MOBILE_WIDTH ? (
         <div className="flex items-center">
-          {isLogged ? (
+          {user ? (
             <>
-              <h2 className="mr-8">{USERNAME}</h2>
-              <h2 className="cursor-pointer border-b hover:border-black transition-colors duration-500">Logout</h2>
+              <h2 className="mr-8">{user.username}</h2>
+              <h2 
+                className="cursor-pointer border-b hover:border-black transition-colors duration-500"
+                onClick={logout}
+              >Logout</h2>
             </>
           ) : (
             <>
@@ -66,11 +83,14 @@ export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
        <div>
         {isOpen ? (
           <div className="w-40 bg-main flex flex-col items-center absolute right-0 top-0">
-            {isLogged ? (
+            {user ? (
               <div className="relative">
                 <div className="p-5">
-                  <h2 className="mb-5">{USERNAME}</h2>
-                  <h2 className="cursor-pointer border-b border-transparent hover:border-black transition-colors duration-500">Logout</h2>
+                  <h2 className="mb-5">{user.username}</h2>
+                  <h2 
+                    className="cursor-pointer border-b border-transparent hover:border-black transition-colors duration-500"
+                    onClick={logout}
+                  >Logout</h2>
                 </div>
                 <img 
                   src={Images.Close} 

@@ -36,8 +36,9 @@ export const Home: React.FC = () => {
     <>
       <Popup />
       <div className="responsiveGrid h-full">
-        {camps.map((camp) => (
+        {camps.map((camp, index) => (
           <Card 
+            key={index}
             title={camp.title}
             shortDescription={camp.shortDescription}
             img={camp.img}

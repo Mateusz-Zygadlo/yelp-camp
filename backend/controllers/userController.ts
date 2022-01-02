@@ -61,9 +61,7 @@ export const login = [
             expires: new Date(new Date().getTime() + 1500000 * 1000),
             secure: true,
           })
-          .json({
-            message: 'Success! you logged to account'
-          })
+          .json(userObj)
       }else{
         return res
           .status(404)
