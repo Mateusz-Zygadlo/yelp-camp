@@ -44,11 +44,6 @@ export const Home: React.FC = () => {
           />
         ))}
       </div>
-      <img 
-        src={Images.Logo} 
-        alt="logo" 
-        className="my-5"
-      />
     </>
   )
 }

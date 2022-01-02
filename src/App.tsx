@@ -9,10 +9,15 @@ import {
   Welcome,
   Home,
   Detail,
+  AddCampground,
+  AddComment
 } from './pages'
 import {
   Navbar,
 } from './components'
+import { 
+  Images 
+} from './assets'
 
 export const App: React.FC = () => {
   return(
@@ -22,6 +27,8 @@ export const App: React.FC = () => {
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
           <Route path='/detail' element={<Detail />} />
+          <Route path='/addCampground' element={<AddCampground />} />
+          <Route path='/addComment' element={<AddComment />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -34,6 +41,12 @@ const MainLayout: React.FC = () => {
       <Navbar isLogged={false} />
 
       <Outlet />
+
+      <img 
+        src={Images.Logo} 
+        alt="logo" 
+        className="my-5"
+      />
     </div>
   )
 }
