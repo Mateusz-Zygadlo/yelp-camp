@@ -10,7 +10,8 @@ import {
   Home,
   Detail,
   AddCampground,
-  AddComment
+  AddComment,
+  SignIn,
 } from './pages'
 import {
   Navbar,
@@ -24,6 +25,7 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/welcome' element={<Welcome />} />
+        <Route path='/login' element={<SignIn />} />
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
           <Route path='/detail' element={<Detail />} />

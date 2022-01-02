@@ -1,0 +1,110 @@
+import React, {
+  useEffect,
+} from 'react'
+import { 
+  useWindowSize,
+  useMeasure,
+  useForm,
+} from '../hooks'
+import {
+  Images
+} from '../assets'
+import { Link } from 'react-router-dom'
+
+export const SignIn: React.FC = () => {
+  const [rect, myRef]: any = useMeasure()
+  const { width, setWidth } = useWindowSize()
+  const { values, handleChange } = useForm({
+    username: '',
+    password: '',
+  })
+
+  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    console.log(true)
+  }
+
+  useEffect(() => {
+    if(rect) setWidth(rect.width)
+  }, [rect])
+  
+  return(
+    <div 
+      className="w-screen h-full lg:flex overflow-x-hidden"
+      ref={myRef}
+    >
+      <div className="px-10 md:px-16 lg:px-24 pt-8 flex flex-col justify-start lg:w-[60rem] h-screen">
+        <div className="flex justify-between items-center">
+          <img
+            src={Images.Logo}
+            alt='Logo'
+          />
+          <p className="border-b-2 hover:border-red-300 cursor-pointer transition-colors duration-500">Back to campground</p>
+        </div>
+        <div className="mt-20">
+          <h1 className="text-4xl mb-5">Start exploring  camps from all around the world.</h1>
+          <form onSubmit={onSubmit}>
+            <div className="flex flex-col">
+              <label 
+                htmlFor="username"
+                className="mt-5 mb-2"
+              >Username</label>
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="example"
+                className="inputStyle w-96"
+                value={values.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label 
+                htmlFor="password"
+                className="mt-5 mb-2"
+              >Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                className="inputStyle w-96"
+                value={values.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mt-5">
+              <input 
+                className="bg-black text-white rounded-md font-bold px-4 py-3"
+                value="Login"
+                type="submit"
+              />
+            </div>
+          </form>
+          <Link to="/register">
+            <p className="border-b-2 mt-5 w-80 hover:border-red-300 cursor-pointer transition-colors duration-500">Not a user yet? Create an account</p>
+          </Link>
+        </div>
+      </div>
+      <div className="lg:w-[50rem] lg:h-screen flex justify-center items-center bg-main lg:justify-end w-screen">
+        <div className="w-full px-6 sm:px-10 lg:w-[20rem] mx-auto py-5">
+          <h1 className="text-2xl">"YelpCamp has honestly saved me hours of research time, and the camps on here are definitely well picked and added."</h1>
+          <div className="mt-5 flex">
+            <img 
+              src={Images.UserTestimonial}
+              alt="User Testimonial"
+            />
+            <div className="ml-3">
+              <h1 className="text-sm">May Andrews</h1>
+              <p className="text-sm">Professional Hiker</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

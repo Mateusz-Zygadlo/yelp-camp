@@ -15,6 +15,7 @@ import SevenSistersWaterfall from './Seven Sisters Waterfall.jpg'
 import LatikRiverside from './Latik Riverside.jpg'
 import BuloySprings from './Buloy Springs.jpg'
 import Map from './Map.png'
+import UserTestimonial from './User Testimonial.svg'
 
 export const Images = {
   Logo,
@@ -34,4 +35,5 @@ export const Images = {
   LatikRiverside,
   BuloySprings,
   Map,
+  UserTestimonial,
 }
