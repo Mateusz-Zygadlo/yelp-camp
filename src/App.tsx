@@ -8,6 +8,7 @@ import {
 import {
   Welcome,
   Home,
+  Detail,
 } from './pages'
 import {
   Navbar,
@@ -20,6 +21,7 @@ export const App: React.FC = () => {
         <Route path='/welcome' element={<Welcome />} />
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
+          <Route path='/detail' element={<Detail />} />
         </Route>
       </Routes>
     </BrowserRouter>

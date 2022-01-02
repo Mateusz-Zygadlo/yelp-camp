@@ -14,6 +14,7 @@ import OnayBeach from './Onay Beach.jpg'
 import SevenSistersWaterfall from './Seven Sisters Waterfall.jpg'
 import LatikRiverside from './Latik Riverside.jpg'
 import BuloySprings from './Buloy Springs.jpg'
+import Map from './Map.png'
 
 export const Images = {
   Logo,
@@ -32,4 +33,5 @@ export const Images = {
   SevenSistersWaterfall,
   LatikRiverside,
   BuloySprings,
+  Map,
 }

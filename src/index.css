@@ -36,4 +36,7 @@
   .AspectRatioCard{
     aspect-ratio: 1/1;
   }
+  .mapSectionWidth{
+    width: 600px;
+  }
 }
