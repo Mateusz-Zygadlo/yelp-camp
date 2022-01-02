@@ -40,7 +40,9 @@ export const SignIn: React.FC = () => {
             src={Images.Logo}
             alt='Logo'
           />
-          <p className="border-b-2 hover:border-red-300 cursor-pointer transition-colors duration-500">Back to campground</p>
+          <Link to='/'>
+            <p className="border-b-2 hover:border-red-300 cursor-pointer transition-colors duration-500">Back to campground</p>
+          </Link>
         </div>
         <div className="mt-20">
           <h1 className="text-4xl mb-5">Start exploring  camps from all around the world.</h1>

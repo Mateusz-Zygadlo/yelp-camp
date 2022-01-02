@@ -2,6 +2,7 @@ import React, {
   useState, 
   useEffect,
 } from 'react'
+import { Link } from 'react-router-dom'
 import { Images } from '../assets'
 import { Button } from '../components'
 import { MOBILE_WIDTH } from '../constants'
@@ -34,10 +35,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
         <img 
           src={Images.Logo} 
           alt="logo" 
-          className="cursor-pointer"
         />
         <ul className="flex ml-8">
-          <li className="cursor-pointer border-b hover:border-black transition-colors duration-500">Home</li>
+          <Link to='/'>
+            <li className="cursor-pointer border-b hover:border-black transition-colors duration-500">Home</li>
+          </Link>
         </ul>
       </div>
      {width > MOBILE_WIDTH ? (
@@ -49,9 +51,13 @@ export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
             </>
           ) : (
             <>
-              <h2 className="cursor-pointer border-b hover:border-black transition-colors duration-500">Login</h2>
+              <Link to='/login'>
+                <h2 className="cursor-pointer border-b hover:border-black transition-colors duration-500">Login</h2>
+              </Link>
               <div className="ml-8">
-                <Button>Create an Account</Button>
+                <Link to='/register'>
+                  <Button>Create an Account</Button>
+                </Link>
               </div>
             </>
           )}
@@ -76,8 +82,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isLogged }) => {
             ) : (
               <div className="relative">
                 <div className="p-5">
-                  <h2 className="cursor-pointer border-b border-transparent hover:border-black transition-colors duration-500 mb-3">Login</h2>
-                  <h2 className="cursor-pointer border-b border-transparent hover:underline transition-colors duration-500">Create an Account</h2>
+                  <Link to='/login'>
+                    <h2 className="cursor-pointer border-b border-transparent hover:border-black transition-colors duration-500 mb-3">Login</h2>
+                  </Link>
+                  <Link to='/register'>
+                    <h2 className="cursor-pointer border-b border-transparent hover:underline transition-colors duration-500">Create an Account</h2>
+                  </Link>
                 </div>
                 <img 
                   src={Images.Close} 

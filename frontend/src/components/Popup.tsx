@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../components'
 import { Images } from '../assets'
+import { Link } from 'react-router-dom'
 
 export const Popup: React.FC = () => {
   return(
@@ -24,7 +25,9 @@ export const Popup: React.FC = () => {
           </div>
           <Button>Search</Button>
         </div>
-        <p className="mt-3 cursor-pointer border-b hover:border-black transition-colors duration-500 w-64">Or add your own campground</p>
+        <Link to='/addCampground'>
+          <p className="mt-3 cursor-pointer border-b hover:border-black transition-colors duration-500 w-64">Or add your own campground</p>
+        </Link>
       </div>
     </div>
   )

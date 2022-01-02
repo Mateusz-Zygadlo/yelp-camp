@@ -8,6 +8,7 @@ import {
 import { Images } from '../assets'
 import { Button } from '../components'
 import { MOBILE_WIDTH } from '../constants'
+import { Link } from 'react-router-dom'
  
 export const Welcome: React.FC = () => {
   const [rect, myRef]: any = useMeasure()
@@ -56,7 +57,9 @@ export const Welcome: React.FC = () => {
           </ul>
         </div>
         <div className="mt-3">
-          <Button>View Campgrounds</Button>
+          <Link to='/'>
+            <Button>View Campgrounds</Button>
+          </Link>
         </div> 
         <div className="mt-6 w-1/2 pb-10 lg:pb-0">
           <h3>Partnered with: </h3>

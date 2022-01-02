@@ -1,5 +1,5 @@
 import React from 'react'
-import { Images } from '../assets'
+import { Link } from 'react-router-dom'
 import { Button } from '../components'
 
 interface CardProps {
@@ -25,7 +25,9 @@ export const Card: React.FC<CardProps> = ({
           <h1 className="text-xl">{title}</h1>
           <p className="text-sm">{shortDescription}</p>
         </div>
-        <Button reverse>View Campground</Button>
+        <Button reverse>
+          <Link to='/detail'>View Campground</Link>
+        </Button>
       </div>
     </div>
   )
