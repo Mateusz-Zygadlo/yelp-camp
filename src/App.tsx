@@ -12,6 +12,7 @@ import {
   AddCampground,
   AddComment,
   SignIn,
+  SignUp,
 } from './pages'
 import {
   Navbar,
@@ -26,6 +27,7 @@ export const App: React.FC = () => {
       <Routes>
         <Route path='/welcome' element={<Welcome />} />
         <Route path='/login' element={<SignIn />} />
+        <Route path='/register' element={<SignUp />} />
         <Route element={<MainLayout />}>
           <Route path='/' element={<Home />} />
           <Route path='/detail' element={<Detail />} />
