@@ -1,4 +1,5 @@
 import React, {
+  useState,
   useEffect,
 } from 'react'
 import { 
@@ -9,20 +10,38 @@ import {
 import {
   Images
 } from '../assets'
-import { Link } from 'react-router-dom'
+import {
+  Link,
+  useNavigate,
+} from 'react-router-dom'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true;
 
 export const SignUp: React.FC = () => {
+  const [error, setError] = useState<null | string>(null)
   const [rect, myRef]: any = useMeasure()
   const { width, setWidth } = useWindowSize()
   const { values, handleChange } = useForm({
     username: '',
     password: '',
   })
+  const history = useNavigate()
 
-  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log(true)
+    try{
+      const res = await axios.post('http://localhost:8000/auth/register', {
+        username: values.username,
+        password: values.password
+      })
+      setError(null)
+
+      return history('/login')
+    }catch(err){
+      setError('Username already exists')
+    }
   }
 
   useEffect(() => {
@@ -46,6 +65,7 @@ export const SignUp: React.FC = () => {
         </div>
         <div className="mt-20">
           <h1 className="text-4xl mb-5">Start exploring  camps from all around the world.</h1>
+          {error && <h3 className="text-xl text-red-500">{error}</h3>}
           <form onSubmit={onSubmit}>
             <div className="flex flex-col">
               <label 

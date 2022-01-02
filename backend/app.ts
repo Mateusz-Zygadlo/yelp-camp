@@ -2,6 +2,7 @@ require('dotenv').config()
 
 import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 
@@ -17,6 +18,7 @@ db.on("error", console.error.bind(console, "mongo connection error"))
 const app = express()
 
 app.use(cookieParser())
+app.use(bodyParser())
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors({
