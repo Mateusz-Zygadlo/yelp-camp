@@ -8,6 +8,7 @@ import mongoose from 'mongoose'
 
 import { router as authRoutes } from './routes/auth'
 import { router as placesRoutes } from './routes/places'
+import { router as commentsRoutes } from './routes/comments' 
 
 const port = process.env.PORT
 
@@ -30,5 +31,6 @@ app.use(cors({
 
 app.use('/auth', authRoutes)
 app.use('/places', placesRoutes)
+app.use('/comments', commentsRoutes)
 
 app.listen(port, () => console.log('api works'))

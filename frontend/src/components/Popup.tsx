@@ -23,7 +23,7 @@ export const Popup: React.FC = () => {
               className="border indent-10 w-full"
             />
           </div>
-          <Button>Search</Button>
+          <Button noFull>Search</Button>
         </div>
         <Link to='/addCampground'>
           <p className="mt-3 cursor-pointer border-b hover:border-black transition-colors duration-500 w-64">Or add your own campground</p>

@@ -1,12 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from '../hooks'
+import { 
+  useParams,
+  useNavigate, 
+} from 'react-router-dom'
+import axios from 'axios'
+import { UserContext } from '../context'
+
+axios.defaults.withCredentials = true
 
 export const AddComment: React.FC = () => {
   const { values, handleChange } = useForm({ comment: '' })
-  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const history = useNavigate()
+  const user = useContext(UserContext)
+  const { id } = useParams()
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log(values)
+    const res = await axios.post(`http://localhost:8000/comments/${id}/place`, {
+      owner: user.user._id,
+      nickname: user.user.username,
+      description: values.comment,
+      place: id,
+    })
+
+    return history('/')
   }
   
   return(

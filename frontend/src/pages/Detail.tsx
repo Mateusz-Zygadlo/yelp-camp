@@ -12,6 +12,7 @@ import axios from 'axios'
 
 export const Detail: React.FC = () => {
   const [place, setPlace] = useState<any>(null)
+  const [comments, setComments] = useState<any>(null)
   const { id } = useParams()
   const getPlace = async () => {
     const res = await axios.get(`http://localhost:8000/places/${id}`)
@@ -19,10 +20,24 @@ export const Detail: React.FC = () => {
       setPlace(res.data)
     }
   }
+  const getComments = async () => {
+    if(!id) return
+    const res = await axios.get(`http://localhost:8000/comments/${id}/place`)
+    if(res && res.data){
+      setComments(res.data)
+    }
+  }
 
   useEffect(() => {
     getPlace()
+    getComments()
   }, [])
+
+  useEffect(() => {
+    if(id){
+      getComments()
+    }
+  }, [id])
 
   return(
     <>
@@ -49,7 +64,19 @@ export const Detail: React.FC = () => {
               </div>
             </div>
             <div className="px-10 py-7 border">
-              <Comment />
+              {comments && comments.result && comments.result.length ? (
+                <>
+                  {comments.result.map((comment: any, index: number) => (
+                    <Comment 
+                      key={index}
+                      nickname={comment.nickname}
+                      date={comment.date}
+                      description={comment.description}
+                    />
+                  ))}
+                </>
+              ) : comments && comments.result && comments.result.length == 0 ?
+                <div>Comments not found</div> : <div>Loading...</div>}
               <div className="mt-5 w-full flex lg:justify-end">
                 <Link to={`/places/${id}/comment`}>
                   <Button>Leave a Review</Button>
