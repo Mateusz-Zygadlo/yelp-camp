@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 
 import { router as authRoutes } from './routes/auth'
+import { router as placesRoutes } from './routes/places'
 
 const port = process.env.PORT
 
@@ -23,10 +24,11 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors({
   origin: "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST"],
   credentials: true,
 }))
 
 app.use('/auth', authRoutes)
+app.use('/places', placesRoutes)
 
 app.listen(port, () => console.log('api works'))

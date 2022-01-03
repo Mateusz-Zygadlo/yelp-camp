@@ -58,7 +58,7 @@ export const Welcome: React.FC = () => {
         </div>
         <div className="mt-3">
           <Link to='/'>
-            <Button>View Campgrounds</Button>
+            <Button noFull>View Campgrounds</Button>
           </Link>
         </div> 
         <div className="mt-6 w-1/2 pb-10 lg:pb-0">

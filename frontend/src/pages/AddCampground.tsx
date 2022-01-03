@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context'
 import { useForm } from '../hooks'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true;
 
 export const AddCampground: React.FC = () => {
+  const user = useContext(UserContext)
+  const _id = user.user._id
+  const history = useNavigate()
   const { values, handleChange } = useForm({ 
     name: '', 
     price: 100, 
     image: '', 
     description: '' 
   })
-  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log(values)
+    const res = await axios.post('http://localhost:8000/places', {
+      owner: _id,
+      name: values.name,
+      price: values.price,
+      image: values.image,
+      description: values.description
+    })
+    
+    return history('/')
   }
   
   return(

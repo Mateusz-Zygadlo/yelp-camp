@@ -47,9 +47,9 @@ export const App: React.FC = () => {
           <Route path='/register' element={<SignUp />} />
           <Route element={<MainLayout />}>
             <Route path='/' element={<Home />} />
-            <Route path='/detail' element={<Detail />} />
+            <Route path='/places/:id' element={<Detail />} />
             <Route path='/addCampground' element={<AddCampground />} />
-            <Route path='/addComment' element={<AddComment />} />
+            <Route path='/places/:id/comment' element={<AddComment />} />
           </Route>
         </Routes>
       </UserContext.Provider>

@@ -1,49 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Popup,
   Card,
 } from '../components'
-import { Images } from '../assets'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 export const Home: React.FC = () => {
-  const camps = [{
-    title: 'Mount Ulap',
-    shortDescription: 'One of the most famous hikes in Benguet is Mt Ulap in Otogon.',
-    img: Images.MountUlap,
-  }, {
-    title: 'Calaguas Islands',
-    shortDescription: 'A paradise of islands that can rival the white sand beauty of Boracay.',
-    img: Images.CalaguasIslands,
-  }, {
-    title: 'Onay Beach',
-    shortDescription: 'This is one of the best beach camping sites, beautiful and pristine.',
-    img: Images.OnayBeach,
-  }, {
-    title: 'Seven Sisters Waterfall',
-    shortDescription: 'The Seven Sisters is the 39th tallest waterfall in Norway.',
-    img: Images.SevenSistersWaterfall,
-  }, {
-    title: 'Latik Riverside',
-    shortDescription: 'Philippines is one of the most dazzling countries in all of Asia.',
-    img: Images.LatikRiverside,
-  }, {
-    title: 'Buloy Springs',
-    shortDescription: 'This is one of the best beach camping sites, beautiful and pristine.',
-    img: Images.BuloySprings
-  }]
+  const [places, setPlaces] = useState<any>(null)
+  const getPlaces = async () => {
+    const res = await axios.get('http://localhost:8000/places')
+    if(res && res.data){
+      setPlaces(res.data)
+    }
+  }
+
+  useEffect(() => {
+    getPlaces()
+  }, [])
 
   return(
     <>
       <Popup />
       <div className="responsiveGrid h-full">
-        {camps.map((camp, index) => (
-          <Card 
-            key={index}
-            title={camp.title}
-            shortDescription={camp.shortDescription}
-            img={camp.img}
-          />
-        ))}
+        {places && places.result ? (
+          <>
+            {places.result.map((place: any, index: number) => (
+              <Card 
+                key={index}
+                title={place.title}
+                description={place.description}
+                image={place.image}
+                _id={place._id}
+              />
+            ))}
+          </>
+        ) : <div>No places</div>}
       </div>
     </>
   )
