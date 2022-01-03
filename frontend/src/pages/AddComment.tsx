@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useForm } from '../hooks'
 import { 
   useParams,
-  useNavigate, 
+  useNavigate,
 } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../context'

@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button } from '../components'
 import { Images } from '../assets'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../context'
 
 export const Popup: React.FC = () => {
+  const { user } = useContext(UserContext)
+  
   return(
     <div className="my-8 h-96 sm:h-80 flex items-center bg-main">
       <div className="ml-3 sm:ml-10 w-[25rem] p-3">
@@ -25,7 +28,7 @@ export const Popup: React.FC = () => {
           </div>
           <Button noFull>Search</Button>
         </div>
-        <Link to='/addCampground'>
+        <Link to={user ? '/addCampground' : '/login'}>
           <p className="mt-3 cursor-pointer border-b hover:border-black transition-colors duration-500 w-64">Or add your own campground</p>
         </Link>
       </div>

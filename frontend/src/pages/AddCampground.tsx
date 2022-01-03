@@ -8,7 +8,6 @@ axios.defaults.withCredentials = true;
 
 export const AddCampground: React.FC = () => {
   const user = useContext(UserContext)
-  const _id = user.user._id
   const history = useNavigate()
   const { values, handleChange } = useForm({ 
     name: '', 
@@ -20,7 +19,7 @@ export const AddCampground: React.FC = () => {
     e.preventDefault()
 
     const res = await axios.post('http://localhost:8000/places', {
-      owner: _id,
+      owner: user.user._id,
       name: values.name,
       price: values.price,
       image: values.image,

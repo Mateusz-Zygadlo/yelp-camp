@@ -1,12 +1,14 @@
 import React, { 
   useState,
   useEffect,
+  useContext,
 } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route,
-  Outlet
+  Outlet,
+  Navigate,
 } from 'react-router-dom'
 import {
   Welcome,
@@ -43,13 +45,29 @@ export const App: React.FC = () => {
       <UserContext.Provider value={value}>
         <Routes>
           <Route path='/welcome' element={<Welcome />} />
-          <Route path='/login' element={<SignIn />} />
-          <Route path='/register' element={<SignUp />} />
+          <Route path='/login' element={
+            <GuestRoute>
+              <SignIn />
+            </GuestRoute>
+          } />
+          <Route path='/register' element={
+            <GuestRoute>
+              <SignUp />
+            </GuestRoute>
+          } />
           <Route element={<MainLayout />}>
             <Route path='/' element={<Home />} />
             <Route path='/places/:id' element={<Detail />} />
-            <Route path='/addCampground' element={<AddCampground />} />
-            <Route path='/places/:id/comment' element={<AddComment />} />
+            <Route path='/addCampground' element={
+              <ProtectedRoute>
+                <AddCampground />
+              </ProtectedRoute>
+            } />
+            <Route path='/places/:id/comment' element={
+              <ProtectedRoute>
+                <AddComment />
+              </ProtectedRoute>
+            } />
           </Route>
         </Routes>
       </UserContext.Provider>
@@ -71,4 +89,16 @@ const MainLayout: React.FC = () => {
       />
     </div>
   )
+}
+
+const ProtectedRoute = ({ children }: any) => {
+  const { user } = useContext(UserContext)
+
+  return user ? children : <Navigate to='/' />
+}
+
+const GuestRoute = ({ children }: any) => {
+  const { user } = useContext(UserContext)
+
+  return !user ? children : <Navigate to='/' />
 }

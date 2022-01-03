@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Images } from '../assets'
+import React, { 
+  useState, 
+  useEffect,
+  useContext
+} from 'react'
 import { 
   Button,
   Comment,
@@ -9,10 +12,12 @@ import {
   Link
 } from 'react-router-dom'
 import axios from 'axios'
+import { UserContext } from '../context'
 
 export const Detail: React.FC = () => {
   const [place, setPlace] = useState<any>(null)
   const [comments, setComments] = useState<any>(null)
+  const { user } = useContext(UserContext)
   const { id } = useParams()
   const getPlace = async () => {
     const res = await axios.get(`http://localhost:8000/places/${id}`)
@@ -78,7 +83,7 @@ export const Detail: React.FC = () => {
               ) : comments && comments.result && comments.result.length == 0 ?
                 <div>Comments not found</div> : <div>Loading...</div>}
               <div className="mt-5 w-full flex lg:justify-end">
-                <Link to={`/places/${id}/comment`}>
+                <Link to={user ? `/places/${id}/comment` : '/login'}>
                   <Button>Leave a Review</Button>
                 </Link>
               </div> 
